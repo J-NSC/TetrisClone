@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.Tilemaps;
+using UnityEngine.UI;
 
 public class Board : MonoBehaviour
 {
@@ -8,6 +9,9 @@ public class Board : MonoBehaviour
     public TetrominoData[] tetrominos;
     public Vector3Int spwanPosition;
     public Vector2Int boardSize = new Vector2Int(10, 20);
+
+
+    public int score;
 
     public RectInt Bounds{
         get {
@@ -89,6 +93,7 @@ public class Board : MonoBehaviour
         while(row < bounds.yMax){
             if(isLineFull(row)){
                 LineClear(row);
+                score += 40;
             }else {
                 row ++;
             }
