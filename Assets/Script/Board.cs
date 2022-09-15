@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.Tilemaps;
+using UnityEngine.UI;
 
 public class Board : MonoBehaviour
 {
@@ -8,6 +9,10 @@ public class Board : MonoBehaviour
     public TetrominoData[] tetrominos;
     public Vector3Int spwanPosition;
     public Vector2Int boardSize = new Vector2Int(10, 20);
+
+
+    public int score;
+    public int highScore =0 ;
 
     public RectInt Bounds{
         get {
@@ -28,6 +33,11 @@ public class Board : MonoBehaviour
 
     private void Start() {
         SpawnPiece();
+        if(SaveScore.OpenData()!= null )
+            highScore = SaveScore.OpenData().highScore;
+        else
+            highScore = 0;
+        // highScore = SaveScore.get("highScore");
     }
 
     public void SpawnPiece(){
@@ -45,6 +55,12 @@ public class Board : MonoBehaviour
 
     private void GameOver(){
         this.tilemap.ClearAllTiles();
+        if(highScore < score){
+            highScore = score; 
+            SaveScore.saveData(new DataScore(highScore));
+            // SaveScore.save("highScore", highScore);
+        }
+        score = 0; 
     }
 
     public void Set(Piece piece){
@@ -89,6 +105,7 @@ public class Board : MonoBehaviour
         while(row < bounds.yMax){
             if(isLineFull(row)){
                 LineClear(row);
+                score += 40;
             }else {
                 row ++;
             }
