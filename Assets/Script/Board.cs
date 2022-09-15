@@ -12,6 +12,10 @@ public class Board : MonoBehaviour
 
 
     public int score;
+<<<<<<< Updated upstream
+=======
+    public int highScore =0 ;
+>>>>>>> Stashed changes
 
     public RectInt Bounds{
         get {
@@ -32,6 +36,7 @@ public class Board : MonoBehaviour
 
     private void Start() {
         SpawnPiece();
+        // highScore = SaveScore.get("highScore");
     }
 
     public void SpawnPiece(){
@@ -49,6 +54,10 @@ public class Board : MonoBehaviour
 
     private void GameOver(){
         this.tilemap.ClearAllTiles();
+        if(highScore < score){
+            highScore = score; 
+            // SaveScore.save("highScore", highScore);
+        }
     }
 
     public void Set(Piece piece){
