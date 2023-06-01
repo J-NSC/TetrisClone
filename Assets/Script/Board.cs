@@ -12,10 +12,7 @@ public class Board : MonoBehaviour
 
 
     public int score;
-<<<<<<< Updated upstream
-=======
     public int highScore =0 ;
->>>>>>> Stashed changes
 
     public RectInt Bounds{
         get {
@@ -39,6 +36,10 @@ public class Board : MonoBehaviour
         // highScore = SaveScore.get("highScore");
     }
 
+    private void Update() {
+        Debug.Log(score);
+    }
+
     public void SpawnPiece(){
         int random = Random.Range(0, this.tetrominos.Length);
         TetrominoData data = this.tetrominos[random];
@@ -54,7 +55,8 @@ public class Board : MonoBehaviour
 
     private void GameOver(){
         this.tilemap.ClearAllTiles();
-        if(highScore < score){
+        score = 0;
+        if(highScore > score){
             highScore = score; 
             // SaveScore.save("highScore", highScore);
         }
